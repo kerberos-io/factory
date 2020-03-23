@@ -1,0 +1,70 @@
+{
+	"type": "template",
+	"key": "",
+	"name": "",
+	"capture": {
+		"id": "ipcamera",
+		"ipcamera": {
+			"rtsp": "",
+			"fps": "25"
+		},
+		"continuous": "false",
+		"postrecording": 10,
+		"prerecording": 5,
+		"maxlengthrecording": 20
+	},
+	"timetable": [
+		{
+      "start1": 0,
+			"end1": 43199,
+			"start2": 43200,
+			"end2": 86400
+		},
+		{
+      "start1": 0,
+			"end1": 43199,
+			"start2": 43200,
+			"end2": 86400
+		},
+		{
+      "start1": 0,
+			"end1": 43199,
+			"start2": 43200,
+			"end2": 86400
+		},
+		{
+      "start1": 0,
+			"end1": 43199,
+			"start2": 43200,
+			"end2": 86400
+		},
+		{
+      "start1": 0,
+			"end1": 43199,
+			"start2": 43200,
+			"end2": 86400
+		},
+		{
+			"start1": 0,
+			"end1": 43199,
+			"start2": 43200,
+			"end2": 86400
+		},
+		{
+      "start1": 0,
+			"end1": 43199,
+			"start2": 43200,
+			"end2": 86400
+		}
+	],
+	"region": {
+		"rectangle": {
+			"x1": 0,
+			"y1": 0,
+			"x2": 800,
+			"y2": 640
+		},
+		"polygon": []
+	},
+	"cloud": {}
+}

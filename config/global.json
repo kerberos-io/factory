@@ -1,0 +1,30 @@
+{
+	"type": "global",
+	"key": "",
+	"name": "",
+	"timezone": "Europe/Brussels",
+	"capture": {
+		"id": "",
+		"ipcamera": {
+			"rtsp": "",
+			"fps": ""
+		},
+		"continuous": "false",
+		"postrecording": 0,
+		"prerecording": 0,
+		"maxlengthrecording": 0
+	},
+	"timetable": null,
+	"region": null,
+	"cloud": {
+		"bucket": "",
+		"region": "",
+		"username": "",
+		"publickey": "",
+		"secretkey": ""
+	},
+	"proxy": "true",
+	"proxyuri": "http://proxy.kerberos.io",
+	"mqtturi": "tcp://mqtt.verstraeten.io:1883",
+	"heartbeaturi": "https://cloud.kerberos.io/api/v1/health"
+}
