@@ -1,0 +1,89 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: factory
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: factory
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: factory
+    spec:
+      containers:
+      - name: machinery
+        image: kerberos/enterprise-factory:latest
+        ports:
+          - containerPort: 80
+          - containerPort: 8081
+        env:
+        - name: MACHINERY_VERSION
+          value: "kerberos/enterprise-machinery:latest"
+        - name: FACTORY_ENVIRONMENT
+          value: "kubernetes"
+        - name: FACTORY_PWD
+          value: "/api"
+        - name: MONGODB_HOST
+          value: "mongodb"
+        - name: MONGODB_DATABASE_CREDENTIALS
+          value: "admin"
+        - name: MONGODB_USERNAME
+          value: "root"
+        - name: MONGODB_PASSWORD
+          value: "1234567890"
+        - name: MQTT_URL
+          value: "tcp://127.0.0.1:1883"
+        - name: MQTT_USERNAME
+          value: ""
+        - name: MQTT_PASSWORD
+          value: ""
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: factory
+  labels:
+    app: factory
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+    name: frontend
+    protocol: TCP
+  - port: 8081
+    name: backend
+    targetPort: 8081
+    protocol: TCP
+  selector:
+    app: factory
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: factory
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: factory.domain.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: factory
+          servicePort: 80
+  - host: api.factory.domain.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: factory
+          servicePort: 8081

@@ -1,0 +1,6 @@
+dashboard:
+  enabled: true
+  domain: traefik.domain.com
+  serviceType: NodePort
+rbac:
+    enabled: true
