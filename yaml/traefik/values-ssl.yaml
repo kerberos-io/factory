@@ -1,0 +1,24 @@
+dashboard:
+  enabled: true
+  domain: traefik.domain.com
+  serviceType: NodePort
+rbac:
+    enabled: true
+ssl:
+  enabled: true
+  enforced: true
+  permanentRedirect: true
+acme:
+  enabled: true
+  challengeType: "dns-01"
+  email: name@domain.com
+  caServer: https://acme-v02.api.letsencrypt.org/directory
+  domains:
+    enabled: true
+    domainsList:
+      - main: "*.domain.com"
+  dnsProvider:
+    name: cloudflare
+    cloudflare:
+      CLOUDFLARE_EMAIL: xxx
+      CLOUDFLARE_API_KEY: xxx
