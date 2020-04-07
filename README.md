@@ -10,4 +10,4 @@ The Factory is the web application/portal, that allows you to create Kerberos En
 
 ## Installation
 
-For installing Kerberos Enterprise (and thus the Factory), you can follow [the how-to on our documentation website](http://doc.kerberos.io/enterprise/installation). In this repository you will find all the configuration files used in the installation tutorial.
+For installing Kerberos Enterprise, you can follow [the how-to on our documentation website](http://doc.kerberos.io/enterprise/installation). In this repository you will find all the configuration files used in the installation tutorial.
