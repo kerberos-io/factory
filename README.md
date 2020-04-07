@@ -6,6 +6,4 @@ That being said, Kerberos Open Source is perfect when monitoring a limited set o
 
 ## Installation
 
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://player.vimeo.com/video/404813147 "Video Title")
-
 For installing Kerberos Enterprise, you can follow [the how-to on our documentation website](http://doc.kerberos.io/enterprise/installation). In this repository you will find all the configuration files used in the installation tutorial.
