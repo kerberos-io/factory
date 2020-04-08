@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: machinery
-        image: kerberos/enterprise-factory:1.0.1
+        image: kerberos/enterprise-factory:1.0.0
         ports:
           - containerPort: 80
           - containerPort: 8081
