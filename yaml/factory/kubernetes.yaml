@@ -20,13 +20,13 @@ spec:
     spec:
       containers:
       - name: machinery
-        image: kerberos/enterprise-factory:1.0.0
+        image: kerberos/enterprise-factory:1.1.0
         ports:
           - containerPort: 80
           - containerPort: 8081
         env:
         - name: MACHINERY_VERSION
-          value: "kerberos/enterprise-machinery:1.0.0"
+          value: "kerberos/enterprise-machinery:1.1.0"
         - name: FACTORY_ENVIRONMENT
           value: "kubernetes"
         - name: FACTORY_PWD
