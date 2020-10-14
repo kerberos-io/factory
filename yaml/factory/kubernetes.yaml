@@ -20,13 +20,14 @@ spec:
     spec:
       containers:
       - name: machinery
-        image: kerberos/enterprise-factory:1.0.0
+        image: "kerberos/enterprise-factory:1.1.0"
+        imagePullPolicy: Always
         ports:
           - containerPort: 80
-          - containerPort: 8081
+          - containerPort: 8082
         env:
         - name: MACHINERY_VERSION
-          value: "kerberos/enterprise-machinery:1.0.0"
+          value: "kerberos/enterprise-machinery:1.1.0"
         - name: FACTORY_ENVIRONMENT
           value: "kubernetes"
         - name: FACTORY_PWD
@@ -45,6 +46,10 @@ spec:
           value: ""
         - name: MQTT_PASSWORD
           value: ""
+        - name: KERBEROS_LOGIN_USERNAME
+          value: "root"
+        - name: KERBEROS_LOGIN_PASSWORD
+          value: "kerberos"
 ---
 apiVersion: v1
 kind: Service
@@ -58,9 +63,9 @@ spec:
     targetPort: 80
     name: frontend
     protocol: TCP
-  - port: 8081
+  - port: 8082
     name: backend
-    targetPort: 8081
+    targetPort: 8082
     protocol: TCP
   selector:
     app: factory
@@ -86,4 +91,4 @@ spec:
       - path: /
         backend:
           serviceName: factory
-          servicePort: 8081
+          servicePort: 8082
