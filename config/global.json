@@ -1,7 +1,5 @@
 {
 	"type": "global",
-	"key": "",
-	"name": "",
 	"timezone": "Europe/Brussels",
 	"capture": {
 		"id": "",
@@ -14,17 +12,14 @@
 		"prerecording": 0,
 		"maxlengthrecording": 0
 	},
-	"timetable": null,
-	"region": null,
-	"cloud": {
-		"bucket": "",
-		"region": "",
-		"username": "",
-		"publickey": "",
-		"secretkey": ""
+	"cloud": "kstorage",
+	"s3": {
+		"proxy": "false",
+		"proxyuri": "http://proxy.kerberos.io"
 	},
-	"proxy": "true",
-	"proxyuri": "http://proxy.kerberos.io",
+	"kstorage": {
+		"uri": "https://storage.kerberos.io"
+	},
 	"mqtturi": "tcp://mqtt.verstraeten.io:1883",
 	"heartbeaturi": "https://cloud.kerberos.io/api/v1/health"
 }
