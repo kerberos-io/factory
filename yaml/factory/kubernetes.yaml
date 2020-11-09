@@ -20,14 +20,14 @@ spec:
     spec:
       containers:
       - name: machinery
-        image: "kerberos/enterprise-factory:1.1.0"
+        image: "kerberos/enterprise-factory:1.2.0"
         imagePullPolicy: Always
         ports:
           - containerPort: 80
           - containerPort: 8082
         env:
         - name: MACHINERY_VERSION
-          value: "kerberos/enterprise-machinery:1.1.0"
+          value: "kerberos/enterprise-machinery:1.2.0"
         - name: FACTORY_ENVIRONMENT
           value: "kubernetes"
         - name: FACTORY_PWD
