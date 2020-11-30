@@ -27,7 +27,7 @@ spec:
           - containerPort: 8082
         env:
         - name: MACHINERY_VERSION
-          value: "kerberos/enterprise-machinery:1.3.2"
+          value: "kerberos/enterprise-machinery:1.3.3"
         - name: FACTORY_ENVIRONMENT
           value: "kubernetes"
         - name: FACTORY_PWD
