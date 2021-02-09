@@ -27,7 +27,7 @@ spec:
           - containerPort: 8082
         env:
         - name: MACHINERY_VERSION
-          value: "kerberos/enterprise-machinery:1.4.0"
+          value: "kerberos/enterprise-machinery:1.4.4"
         - name: MACHINERY_MEMORY_LIMIT
           value: "256Mi"
         - name: FACTORY_ENVIRONMENT
