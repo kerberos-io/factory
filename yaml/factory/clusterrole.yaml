@@ -13,8 +13,8 @@ metadata:
   name: pods-list
 subjects:
 - kind: ServiceAccount
-  name: default
-  namespace: default
+  name: kerberos
+  namespace: kerberos
 roleRef:
   kind: ClusterRole
   name: pods-list
