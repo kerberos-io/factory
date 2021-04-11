@@ -27,13 +27,15 @@ spec:
           - containerPort: 8082
         env:
         - name: MACHINERY_VERSION
-          value: "kerberos/enterprise-machinery:1.4.11"
+          value: "kerberos/enterprise-machinery:1.4.16"
         - name: MACHINERY_MEMORY_LIMIT
           value: "256Mi"
         - name: FACTORY_ENVIRONMENT
           value: "kubernetes"
         - name: FACTORY_PWD
           value: "/api"
+        - name: NAMESPACE
+          value: "kerberos"
         # By default the API will be served on api.factorydomain.com (api.) is prefixed.
         # If you prefer another hostname for the API e.g. myfactoryapi-factorydomain.com
         # Enable and change this variable to "myfactoryapi-factorydomain.com"
