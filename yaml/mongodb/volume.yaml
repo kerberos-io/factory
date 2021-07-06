@@ -9,7 +9,7 @@ spec:
     storage: 10Gi
   accessModes:
   - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Recycle
+  persistentVolumeReclaimPolicy: Delete
   storageClassName: local-storage
   local:
     path: /home/mongodb/
