@@ -20,14 +20,14 @@ spec:
     spec:
       containers:
       - name: machinery
-        image: "kerberos/enterprise-factory:1.4.12"
+        image: "kerberos/enterprise-factory:1.4.13"
         #imagePullPolicy: Always
         ports:
           - containerPort: 80
           - containerPort: 8082
         env:
         - name: MACHINERY_VERSION
-          value: "kerberos/enterprise-machinery:1.4.18"
+          value: "kerberos/enterprise-machinery:1.4.21"
         - name: MACHINERY_MEMORY_LIMIT
           value: "256Mi"
         - name: FACTORY_ENVIRONMENT
