@@ -1,9 +1,9 @@
-# Kerberos Enterprise
+# Kerberos Factory
 
-Over the years Kerberos evolved into a mature and stable solution. Lots of people and companies started to adopt the system, and requested enhancements. Despite the fact that Kerberos Open Source is stable and feature rich, every solution has its limitations, especially if you aim to scale it.
+Kerberos Factory brings the Kerberos Agent to another level. The Kerberos Agent can be deployed anywhere you want, it can run as a binary, Docker container and inside a Kubernetes cluster. The latter is where Kerberos Factory shines, it is a UI that allows you to deploy and configure your Kerberos Agents into your Kubernetes cluster more easily.
 
-That being said, Kerberos Open Source is perfect when monitoring a limited set of surveillance cameras, but it doesn't scale well if you plan to monitor dozens or hundreds of surveillance cameras. Although Kerberos Open Source ships as a docker image, it has no high availability or fail over functionality. Due to these reasons we have developed Kerberos Enterprise, which is suitable for scaling against your ever growing video surveillance landscape, and keeps them up and running in whatever situation.
+![Kerberos Factory](https://user-images.githubusercontent.com/1546779/135861052-451fa03f-013c-4715-9a47-f80fe180b0da.png)
 
 ## Installation
 
-For installing Kerberos Enterprise, you can follow [the how-to on our documentation website](http://doc.kerberos.io/enterprise/installation). In this repository you will find all the configuration files used in the installation tutorial.
+For installing Kerberos Factory, you can follow [the how-to on our documentation website](http://doc.kerberos.io/factory/installation). In this repository you will find all the configuration files used in the installation tutorial.
