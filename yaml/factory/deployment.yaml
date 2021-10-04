@@ -48,7 +48,7 @@ spec:
         - name: MONGODB_USERNAME
           value: "root"
         - name: MONGODB_PASSWORD
-          value: "1234567890"
+          value: "yourmongodbpassword"
         - name: MQTT_URL
           value: "tcp://127.0.0.1:1883"
         - name: MQTT_USERNAME
