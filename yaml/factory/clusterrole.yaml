@@ -1,7 +1,7 @@
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  namespace: kerberos
+  namespace: kerberos-factory
   name: pods-list
 rules:
 - apiGroups: ["", "apps"]
@@ -15,7 +15,7 @@ metadata:
 subjects:
 - kind: ServiceAccount
   name: default
-  namespace: kerberos
+  namespace: kerberos-factory
 roleRef:
   kind: ClusterRole
   name: pods-list
