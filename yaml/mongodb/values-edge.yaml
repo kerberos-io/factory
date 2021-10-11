@@ -9,7 +9,7 @@ global:
 #   storageClass: myStorageClass
 ## Override the namespace for resource deployed by the chart, but can itself be overridden by the local namespaceOverride
 #   namespaceOverride: my-global-namespace
-  storageClass: local-storage
+  storageClass: openebs-hostpath # or other..
 image:
   ## Bitnami MongoDB registry
   ##
