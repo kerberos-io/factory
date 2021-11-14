@@ -4,7 +4,7 @@ metadata:
   name: pods-list
 rules:
   - apiGroups: ["", "apps"]
-    resources: ["pods", "pods/log", "deployments", "services", "endpoints", "nodes"]
+    resources: ["pods", "pods/log", "deployments", "services", "services/proxy", "endpoints", "nodes"]
     verbs: ["get", "list", "create", "update", "delete", "watch"]
 ---
 kind: ClusterRoleBinding
