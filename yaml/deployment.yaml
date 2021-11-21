@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: factory
-        image: "kerberos/factory:1.0.413401298"
+        image: "kerberos/factory:1.0.413418340"
         #imagePullPolicy: Always
         ports:
           - containerPort: 80
@@ -36,7 +36,7 @@ spec:
         - name: KERBEROS_LOGIN_PASSWORD
           value: "kerberos"
         - name: KERBEROS_AGENT_IMAGE
-          value: "kerberos/agent:1.0.1604450112"
+          value: "kerberos/agent:1.0.1803327601"
         - name: KERBEROS_AGENT_MEMORY_LIMIT
           value: "256Mi"
         - name: FACTORY_ENVIRONMENT
