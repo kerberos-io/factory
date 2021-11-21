@@ -14,7 +14,7 @@ metadata:
 subjects:
   - kind: ServiceAccount
     name: default
-    namespace: kerberos-enterprise
+    namespace: kerberos-factory
 roleRef:
   kind: ClusterRole
   name: pods-list
