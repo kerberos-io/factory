@@ -19,46 +19,35 @@ spec:
         app: factory
     spec:
       containers:
-      - name: machinery
-        image: "kerberos/enterprise-factory:1.4.13"
+      - name: factory
+        image: "kerberos/factory:1.0.413401298"
         #imagePullPolicy: Always
         ports:
           - containerPort: 80
           - containerPort: 8082
+        envFrom:
+          - configMapRef:
+              name: mongodb
         env:
-        - name: MACHINERY_VERSION
+        - name: NAMESPACE
+          value: "kerberos-factory"
+        - name: KERBEROS_LOGIN_USERNAME
+          value: "root"
+        - name: KERBEROS_LOGIN_PASSWORD
+          value: "kerberos"
+        - name: KERBEROS_AGENT_IMAGE
           value: "kerberos/agent:1.0.1604450112"
-        - name: MACHINERY_MEMORY_LIMIT
+        - name: KERBEROS_AGENT_MEMORY_LIMIT
           value: "256Mi"
         - name: FACTORY_ENVIRONMENT
           value: "kubernetes"
-        - name: FACTORY_PWD
-          value: "/api"
-        - name: NAMESPACE
-          value: "kerberos-factory"
+        - name: K8S_PROXY
+          value: http://localhost:8082
         # By default the API will be served on api.factorydomain.com (api.) is prefixed.
         # If you prefer another hostname for the API e.g. myfactoryapi-factorydomain.com
         # Enable and change this variable to "myfactoryapi-factorydomain.com"
         #- name: FACTORY_API_URL
         #  value: "myfactoryapi-factorydomain.com"
-        - name: MONGODB_HOST
-          value: "mongodb.mongodb"
-        - name: MONGODB_DATABASE_CREDENTIALS
-          value: "admin"
-        - name: MONGODB_USERNAME
-          value: "root"
-        - name: MONGODB_PASSWORD
-          value: "yourmongodbpassword"
-        - name: MQTT_URL
-          value: "tcp://127.0.0.1:1883"
-        - name: MQTT_USERNAME
-          value: ""
-        - name: MQTT_PASSWORD
-          value: ""
-        - name: KERBEROS_LOGIN_USERNAME
-          value: "root"
-        - name: KERBEROS_LOGIN_PASSWORD
-          value: "kerberos"
 ---
 apiVersion: v1
 kind: Service
