@@ -36,7 +36,7 @@ spec:
         - name: KERBEROS_LOGIN_PASSWORD
           value: "kerberos"
         - name: KERBEROS_AGENT_IMAGE
-          value: "kerberos/agent:1.0.1803327601"
+          value: "kerberos/agent:1.0.1807181678"
         - name: KERBEROS_AGENT_MEMORY_LIMIT
           value: "256Mi"
         - name: FACTORY_ENVIRONMENT
