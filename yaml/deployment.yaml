@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: factory
-        image: "kerberos/factory:1.0.435794318"
+        image: "kerberos/factory:1.0.450170906"
         #imagePullPolicy: Always
         ports:
           - containerPort: 80
@@ -48,6 +48,12 @@ spec:
         # Enable and change this variable to "myfactoryapi-factorydomain.com"
         #- name: FACTORY_API_URL
         #  value: "myfactoryapi-factorydomain.com"
+        
+        # Additional certificates can be injected into the Kerberos Agents, through the creation of a configmap. 
+        # A certificate "ca-certificates.crt" is expected in the configmap, and will be added to
+        # the Kerberos Agent in following directory: /etc/ssl/certs/
+        #- name: CERTIFICATES_CONFIGMAP
+        #  value: "rootcerts" 
 ---
 apiVersion: v1
 kind: Service
