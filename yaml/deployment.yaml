@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: factory
-        image: "kerberos/factory:1.0.450170906"
+        image: "kerberos/factory:1.0.451718676"
         #imagePullPolicy: Always
         ports:
           - containerPort: 80
