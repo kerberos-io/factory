@@ -28,6 +28,11 @@ spec:
         envFrom:
           - configMapRef:
               name: mongodb
+        # Injecting the ca-certificates inside the container.
+        #volumeMounts:
+        #- name: rootcerts
+        #  mountPath: /etc/ssl/certs/ca-certificates.crt
+        #  subPath: ca-certificates.crt
         env:
         - name: NAMESPACE
           value: "kerberos-factory"
@@ -54,6 +59,10 @@ spec:
         # the Kerberos Agent in following directory: /etc/ssl/certs/
         #- name: CERTIFICATES_CONFIGMAP
         #  value: "rootcerts" 
+      #volumes:
+      #- name: rootcerts
+      #  configMap:
+      #    name: rootcerts
 ---
 apiVersion: v1
 kind: Service
