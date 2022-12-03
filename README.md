@@ -1,17 +1,55 @@
 # Kerberos Factory
 
-Kerberos Factory brings the Kerberos Agent to another level. The Kerberos Agent can be deployed anywhere you want, it can run as a binary, Docker container and inside a Kubernetes cluster. The latter is where Kerberos Factory shines, it is a UI that allows you to deploy and configure your Kerberos Agents into your Kubernetes cluster more easily.
+Kerberos Factory brings [a Kerberos Agent](https://github.com/kerberos-io/agent) to another level. [Kerberos Agent's](https://github.com/kerberos-io/agent) are deployed where and how you want, it can run as a binary, Docker container or inside a Kubernetes cluster. The latter is where Kerberos Factory comes into the picture. Kerberos Factory is a UI, build for non-technical users, that allows to deploy and configure [Kerberos Agents](https://github.com/kerberos-io/agent) into your Kubernetes cluster more easily. It bypasses the complexity of creating Kubernetes resources, by providing a simple UI to connect a Kerberos Agent to your camera, and configure it for your usecase.
 
-![Kerberos Factory](https://user-images.githubusercontent.com/1546779/135861184-156c7e16-2a67-407c-830b-bb6cc10b67fc.png)
+Kerberos Factory is build for the management of [Kerberos Agents](https://github.com/kerberos-io/agent) in a Kubernetes cluster. If Kubernetes is out-of-scope for your deployment, and you plan to use a manual or single-node container deployment (e.g. Docker) it's recommended to use the default `docker compose` or `docker` CLI.
 
+## :thinking: Prerequisites
+
+* a Kubernetes cluster configured with multiple nodes.
+
+## :books: Overview
+
+### Installation
+1. [Kubernetes](#kubernetes)
+
+### Introductions
+1. [Kerberos Factory](#kerberos-factory)
+2. [Mission](#mission)
+   
 ## Installation
 
-For installing Kerberos Factory, you can follow [the how-to on our documentation website](http://doc.kerberos.io/factory/installation). In this repository you will find all the configuration files used in the installation tutorial.
+As previously mentioned, for installing Kerberos Factory, you'll require a Kubernetes cluster. If you plan to use `docker` or `docker compose` than Kerberos Factory is out-of-scope.
 
-## Dependencies
+### Kubernetes
 
-In this tutorial we will install a couple of components to run Kerberos Factory. We will use and install.
+Leveraging Kerberos Factory allows you to deploy Kerberos Agents in you cluster. Kubernetes will automatically load balance your Kerberos Agents in your cluster, without you requiring all the hassle of scaling out your video landscape.
 
-- OpenEBS for storage
-- MongoDB for structuring information (configs)
-- MetalLB to provide a loadbalancer (for Nginx or Traefik)
+> Follow the `Kubernetes` tutorial [by navigating to the kubernetes sub folder in this repostitory](kubernetes/).
+
+## Introductions
+
+Please note that we have added a brief introduction to Kerberos Factory below. To get a complete overview [visit the documentation page](https://doc.kerberos.io), where you will be able to learn about all the ins and outs of the Kerberos.io ecosystem.
+
+### Kerberos Factory
+
+Kerberos Factory is a front-end that consumes and interacts with the Kubernetes API. It schedules Kerberos Agents as Kubernetes resource, and more specific deployments. For every camera stream a Kerberos Agent is created as a Kubernetes deployment.
+
+Through the front-end a non-technical administrator can configure and add more Kerberos Agents to the cluster. The administrator has the ability to interact with the Kerberos Agent through one or more configuration screens, to tune and optimize the Kerberos Agent.
+
+#### ONVIF
+
+Kerberos Factory allows you to scan the local network and create Kerberos Agents for every discovered camera. Once discovered, Kerberos Factory will create a Kubernetes deployment for every Kerberos Agent.
+
+#### Global settings
+
+Instead of tuning all your Kerberos Agent, Kerberos Factory allows you to set up global settings which are inherited by all your Kerberos Agents.
+
+
+[![Kerberos Factory](./assets/kerberos-factory.png)](https://kerberos.io/)
+
+### Mission
+
+Kerberos Factory belong to the Enterprise suite. The goal of this suite is to support enterprises building a scalable video surveillance infrastructure that is open to support all business processes and usecases. Kerberos Enterprise Suite will do all the heavy lifting in terms scaling the processing and storage of you surveillance cameras. On top of that it will provide integration and extensibility to build your own applications on top of that using Swagger API's, and real-time messaging such as Kafka.
+
+[![Kerberos Enterprise Suite](./assets/kerberosio-enterprise.png)](https://kerberos.io/)
