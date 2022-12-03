@@ -14,7 +14,7 @@ Kerberos Factory is build for the management of [Kerberos Agents](https://github
 1. [Kubernetes](#kubernetes)
 
 ### Introductions
-1. [Kerberos Factory](#kerberos-factory)
+1. [Kerberos Factory](#kerberos-factory-1)
 2. [Mission](#mission)
    
 ## Installation
