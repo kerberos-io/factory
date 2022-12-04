@@ -1,0 +1,114 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: factory
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: factory
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: factory
+    spec:
+      containers:
+      - name: factory
+        image: "kerberos/factory:1.0.669719463"
+        #imagePullPolicy: Always
+        ports:
+          - containerPort: 80
+          - containerPort: 8082
+        envFrom:
+          - configMapRef:
+              name: mongodb
+        # Injecting the ca-certificates inside the container.
+        #volumeMounts:
+        #- name: rootcerts
+        #  mountPath: /etc/ssl/certs/ca-certificates.crt
+        #  subPath: ca-certificates.crt
+        env:
+        - name: NAMESPACE
+          value: "kerberos-factory"
+        - name: KERBEROS_LOGIN_USERNAME
+          value: "root"
+        - name: KERBEROS_LOGIN_PASSWORD
+          value: "kerberos"
+        - name: KERBEROS_AGENT_IMAGE
+          value: "kerberos/agent:3ce9adc"
+        - name: KERBEROS_AGENT_MEMORY_LIMIT
+          value: "256Mi"
+        - name: FACTORY_ENVIRONMENT
+          value: "kubernetes"
+        - name: K8S_PROXY
+          value: http://localhost:8082
+        # By default the API will be served on api.factorydomain.com (api.) is prefixed.
+        # If you prefer another hostname for the API e.g. myfactoryapi-factorydomain.com
+        # Enable and change this variable to "myfactoryapi-factorydomain.com"
+        #- name: FACTORY_API_URL
+        #  value: "myfactoryapi-factorydomain.com"
+        
+        # Additional certificates can be injected into the Kerberos Agents, through the creation of a configmap. 
+        # A certificate "ca-certificates.crt" is expected in the configmap, and will be added to
+        # the Kerberos Agent in following directory: /etc/ssl/certs/
+        #- name: CERTIFICATES_CONFIGMAP
+        #  value: "rootcerts" 
+      #volumes:
+      #- name: rootcerts
+      #  configMap:
+      #    name: rootcerts
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: factory
+  labels:
+    app: factory
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+    name: frontend
+    protocol: TCP
+  - port: 8082
+    name: backend
+    targetPort: 8082
+    protocol: TCP
+  selector:
+    app: factory
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: factory
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    #kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - host: factory.domain.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service: 
+            name: factory
+            port: 
+              number: 80
+  - host: api.factory.domain.com # myfactoryapi-factorydomain.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: factory
+            port: 
+              number: 8082

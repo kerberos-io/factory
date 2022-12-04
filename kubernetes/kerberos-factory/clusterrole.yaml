@@ -1,0 +1,21 @@
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: pods-list
+rules:
+  - apiGroups: ["", "apps"]
+    resources: ["pods", "pods/log", "deployments", "services", "services/proxy", "endpoints", "nodes"]
+    verbs: ["get", "list", "create", "update", "delete", "watch"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: pods-list
+subjects:
+  - kind: ServiceAccount
+    name: default
+    namespace: kerberos-factory
+roleRef:
+  kind: ClusterRole
+  name: pods-list
+  apiGroup: rbac.authorization.k8s.io
