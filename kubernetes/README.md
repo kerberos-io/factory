@@ -25,22 +25,16 @@ This installation guide will slight modify depending on if you are self-hosting 
 12. [Access the system](#access-the-system)
 
 ### B. Self-hosted Kubernetes
-- [Kerberos Factory on Kubernetes](#kerberos-factory-on-kubernetes)
-  - [Managed Kubernetes vs Self-hosted Kubernetes](#managed-kubernetes-vs-self-hosted-kubernetes)
-    - [A. Managed Kubernetes](#a-managed-kubernetes)
-    - [B. Self-hosted Kubernetes](#b-self-hosted-kubernetes)
-  - [A. Managed Kubernetes](#a-managed-kubernetes-1)
-  - [B. Self-hosted Kubernetes](#b-self-hosted-kubernetes-1)
-    - [Prerequisites](#prerequisites)
-    - [Docker](#docker)
-    - [Kubernetes](#kubernetes)
-    - [Untaint all nodes](#untaint-all-nodes)
-    - [Calico](#calico)
-    - [Introduction](#introduction)
-    - [Kerberos Factory](#kerberos-factory)
-    - [MetalLB](#metallb)
-    - [OpenEBS](#openebs)
-    - [Proceed with managed Kubernetes](#proceed-with-managed-kubernetes)
+1 [Prerequisites](#prerequisites-1)
+2. [Docker](#docker)
+3. [Kubernetes](#kubernetes)
+4. [Untaint all nodes](#untaint-all-nodes)
+5. [Calico](#calico)
+6. [Introduction](#introduction-1)
+7. [Kerberos Vault](#kerberos-vault-1)
+8. [MetalLB](#metallb)
+9. [OpenEBS](#openebs)
+10. [Proceed with managed Kubernetes](#proceed-with-managed-kubernetes)
 
 ## A. Managed Kubernetes
 
