@@ -25,7 +25,8 @@ This installation guide will slight modify depending on if you are self-hosting 
 12. [Access the system](#access-the-system)
 
 ### B. Self-hosted Kubernetes
-1 [Prerequisites](#prerequisites-1)
+1. [Prerequisites](#prerequisites-1)
+
 2. [Docker](#docker)
 3. [Kubernetes](#kubernetes)
 4. [Untaint all nodes](#untaint-all-nodes)
