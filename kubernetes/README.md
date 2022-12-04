@@ -82,11 +82,11 @@ A best practices is to isole tools and/or applications in a namespace, this will
 
     kubectl create namespace kerberos-factory
 
-This namespace will later be used to deploy the relevant services for Kerberos Vault.
+This namespace will later be used to deploy the relevant services for Kerberos Factory.
 
 ### Helm
 
-Next we will install a couple of dependencies which are required for Kerberos Vault. [**Helm**](https://helm.sh/) is a package manager for Kubernetes, it helps you to set up services more easily (this could be a MQTT broker, a database, etc).
+Next we will install a couple of dependencies which are required for Kerberos Factory. [**Helm**](https://helm.sh/) is a package manager for Kubernetes, it helps you to set up services more easily (this could be a MQTT broker, a database, etc).
 Instead of writing yaml files for every service we need, we use so-called Charts (libraries), that you can reuse and configure the, with the appropriate settings.
 
 Use one of the preferred OS package managers to install the Helm client:
@@ -133,7 +133,7 @@ If you don't like `Traefik` but you prefer `Ingress Nginx`, that works as well.
 
 When using Kerberos Factory, it will persist the configurations of your Kerberos Agents in a MongoDB database. As used before, we are using `helm` to install MongoDB in our Kubernetes cluster.
 
-Have a look into the `./mongodb/values.yaml` file, you will find plenty of configurations for the MongoDB helm chart. To change the username and password of the MongoDB instance, go ahead and [find the attribute where](https://github.com/kerberos-io/vault/blob/master/kubernetes/mongodb/values.yaml#L75) you can change the root password.
+Have a look into the `./mongodb/values.yaml` file, you will find plenty of configurations for the MongoDB helm chart. To change the username and password of the MongoDB instance, go ahead and [find the attribute where](https://github.com/kerberos-io/factory/blob/master/kubernetes/mongodb/values.yaml#L148) you can change the root password.
 
     helm repo add bitnami https://charts.bitnami.com/bitnami
     kubectl create namespace mongodb
@@ -160,7 +160,7 @@ Modify the MongoDB credentials in the `./mongodb/mongodb.config.yaml`, and make 
 
 Create the config map.
 
-    kubectl apply -f ./mongodb/mongodb.config.yaml -n kerberos-vault
+    kubectl apply -f ./mongodb/mongodb.config.yaml -n kerberos-factory
 
 ### Deployment
 
