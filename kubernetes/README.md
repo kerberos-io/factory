@@ -260,7 +260,7 @@ We'll start by cloning the configurations from our [Github repo](https://github.
 
 Make sure to change directory to the `kubernetes` folder.
 
-    cd kubernetes
+    cd factory/kubernetes
 
 ### Namespace
 
