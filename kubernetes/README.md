@@ -350,7 +350,7 @@ Create the config map.
 
 ### Deployment
 
-Before installing Kerberos Factory, open the `./kerberos-factory/deployment.yaml` configuration file. At the of the bottom file you will find two endpoints, similar to the Ingres file below. Update the hostnames to your own preferred domain, and add these to your DNS server or `/etc/hosts` file (pointing to the same IP as the Traefik/Ingress-nginx EXTERNAL-IP).
+Before installing Kerberos Factory, open the `./kerberos-factory/deployment.yaml` configuration file. At the of the bottom file you will find two endpoints, similar to the Ingres file below. Update the hostname to your own preferred domain, and add these to your DNS server or `/etc/hosts` file (pointing to the same IP as the Traefik/Ingress-nginx EXTERNAL-IP).
 
         spec:
           rules:
@@ -361,13 +361,6 @@ Before installing Kerberos Factory, open the `./kerberos-factory/deployment.yaml
                 backend:
                   serviceName: kerberos-factory
                   servicePort: 80
-    -->   - host: api.factory.domain.com
-            http:
-              paths:
-              - path: /
-                backend:
-                  serviceName: kerberos-factory
-                  servicePort: 8082
 
 If you are using Ingress Nginx, do not forgot to comment `Traefik` and uncomment `Ingress Nginx`.
 
@@ -378,6 +371,9 @@ If you are using Ingress Nginx, do not forgot to comment `Traefik` and uncomment
       annotations:
         #kubernetes.io/ingress.class: traefik
         kubernetes.io/ingress.class: nginx
+        kubernetes.io/tls-acme: "true"
+        nginx.ingress.kubernetes.io/ssl-redirect: "true"
+        cert-manager.io/cluster-issuer: "letsencrypt-prod"
 
 Once you have corrected the DNS names (or internal /etc/hosts file), install the Kerberos Factory web app inside your cluster.
 

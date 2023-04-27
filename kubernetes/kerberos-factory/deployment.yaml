@@ -20,11 +20,10 @@ spec:
     spec:
       containers:
       - name: factory
-        image: "kerberos/factory:1.0.669719463"
+        image: "kerberos/factory:1.0.851209989"
         #imagePullPolicy: Always
         ports:
           - containerPort: 80
-          - containerPort: 8082
         envFrom:
           - configMapRef:
               name: mongodb
@@ -34,26 +33,24 @@ spec:
         #  mountPath: /etc/ssl/certs/ca-certificates.crt
         #  subPath: ca-certificates.crt
         env:
-        - name: NAMESPACE
-          value: "kerberos-factory"
         - name: KERBEROS_LOGIN_USERNAME
           value: "root"
         - name: KERBEROS_LOGIN_PASSWORD
           value: "kerberos"
+
         - name: KERBEROS_AGENT_IMAGE
           value: "kerberos/agent:9d70778"
         - name: KERBEROS_AGENT_MEMORY_LIMIT
           value: "256Mi"
+
+        # Do not touch this, unless you know what you are doing.
+        - name: NAMESPACE
+          value: "kerberos-factory"
         - name: FACTORY_ENVIRONMENT
           value: "kubernetes"
         - name: K8S_PROXY
-          value: http://localhost:8082
-        # By default the API will be served on api.factorydomain.com (api.) is prefixed.
-        # If you prefer another hostname for the API e.g. myfactoryapi-factorydomain.com
-        # Enable and change this variable to "myfactoryapi-factorydomain.com"
-        #- name: FACTORY_API_URL
-        #  value: "myfactoryapi-factorydomain.com"
-        
+          value: http://localhost:80
+
         # Additional certificates can be injected into the Kerberos Agents, through the creation of a configmap. 
         # A certificate "ca-certificates.crt" is expected in the configmap, and will be added to
         # the Kerberos Agent in following directory: /etc/ssl/certs/
@@ -76,10 +73,6 @@ spec:
     targetPort: 80
     name: frontend
     protocol: TCP
-  - port: 8082
-    name: backend
-    targetPort: 8082
-    protocol: TCP
   selector:
     app: factory
 ---
@@ -96,9 +89,8 @@ metadata:
 spec:
   #tls:
   #- hosts:
-  #  - factory.domain.com
-  #  - api.factory.domain.com
-  #  secretName: factory-tls
+    #- factory.domain.com
+    #secretName: factory-tls
   rules:
   - host: factory.domain.com
     http:
@@ -110,13 +102,3 @@ spec:
             name: factory
             port: 
               number: 80
-  - host: api.factory.domain.com # myfactoryapi-factorydomain.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: factory
-            port: 
-              number: 8082
