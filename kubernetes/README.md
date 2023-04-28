@@ -361,7 +361,7 @@ Once done, apply the `Ingress` file.
 
     kubectl apply -f ./kerberos-factory/ingress.yaml -n kerberos-factory
 
-#### Traefik
+#### (Option 1) Traefik
 
 [**Traefik**](https://containo.us/traefik/) is a reverse proxy and load balancer which allows you to expose your deployments more easily. Kerberos uses Traefik to expose its APIs more easily.
 
@@ -382,7 +382,7 @@ After installation, you should have an IP attached to Traefik service, look for 
 
 Go to your DNS provider and link the domain you've configured in the first step `traefik.domain.com` to the IP address of thT `EXTERNAL-IP` attribute. When browsing to `traefik.domain.com`, you should see the traefik dashboard showing up.
 
-#### Ingress-Nginx (alternative for Traefik)
+#### (Option 2) Ingress-Nginx (alternative for Traefik)
 
 If you don't like `Traefik` but you prefer `Ingress Nginx`, that works as well.
 
