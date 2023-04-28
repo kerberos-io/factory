@@ -330,7 +330,7 @@ Kerberos Factory will create Kerberos Agents on our behalf, and so create Kubern
 
 Verify that the Kerberos Factory got assigned an internal IP address.
 
-    kubectl get svc -n kerberos-factor
+    kubectl get svc -n kerberos-factory
 
 You should see the service `factory-lb` being created, together with and IP address assigned from MetalLB pool.
 
