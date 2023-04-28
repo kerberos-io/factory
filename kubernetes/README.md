@@ -320,7 +320,7 @@ Create the config map.
 
 ### Deployment
 
-To install the Kerberos Factory web app inside your cluster, simply execute below `kubectl` command. This will create the deployment for us with the necessary configurations, and exposed it on internal IP address, thanks to our `LoadBalancer` MetalLB.
+To install the Kerberos Factory web app inside your cluster, simply execute below `kubectl` command. This will create the deployment for us with the necessary configurations, and exposed it on internal/external IP address, thanks to our `LoadBalancer` MetalLB or cloud provider.
 
     kubectl apply -f ./kerberos-factory/deployment.yaml -n kerberos-factory
 
@@ -332,16 +332,16 @@ Verify that the Kerberos Factory got assigned an internal IP address.
 
     kubectl get svc -n kerberos-factory
 
-You should see the service `factory-lb` being created, together with and IP address assigned from MetalLB pool.
+You should see the service `factory-lb` being created, together with and IP address assigned from the MetalLB pool or cloud provider.
 
         NAME                               TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)        AGE
     --> factory-lb                         LoadBalancer   10.107.209.226   192.168.1.81   80:30636/TCP   24m
 
 ### (Optional) Ingress
 
-By default Kerberos Factory deployment will use and create a `LoadBalancer` through MetalLB. This means that Kerberos Factory will be granted an internal IP from which you can navigate to and consume the Kerberos Factory UI. However if you wish to use the `Ingress` functionality by assigning a readable DNS name, you'll need to modify a few things.
+By default Kerberos Factory deployment will use and create a `LoadBalancer`. This means that Kerberos Factory will be granted an internal/external IP from which you can navigate to and consume the Kerberos Factory UI. However if you wish to use the `Ingress` functionality by assigning a readable DNS name, you'll need to modify a few things.
 
-First make sure to install either Traefik or Ingress-nginx, following sections below. Once you have chosen an `Ingress`, open the `./kerberos-factory/ingress.yaml` configuration file. At the of the bottom file you will find an endpoint, similar to the `Ingress` file below. Update the hostname to your own preferred domain, and add these to your DNS server or `/etc/hosts` file (pointing to the same IP as the Traefik/Ingress-nginx EXTERNAL-IP).
+First make sure to install either Traefik or Ingress-nginx, following sections below. Once you have chosen an `Ingress`, open the `./kerberos-factory/ingress.yaml` configuration file. At the of the bottom file you will find an endpoint, similar to the `Ingress` file below. Update the hostname to your own preferred domain, and add these to your DNS server or `/etc/hosts` file (pointing to the same IP address as the Traefik/Ingress-nginx IP address).
 
         spec:
           rules:
@@ -424,6 +424,6 @@ It should look like this.
 
 ### Access the system
 
-Once everything is configured correctly, you should be able to access the Kerberos Factory application. By navigating to the internal ip address (`LoadBalancer`) or domain (`Ingress`) with your browser you will see the Kerberos Factory login page showing up.
+Once everything is configured correctly, you should be able to access the Kerberos Factory application. By navigating to the internal/external IP address (`LoadBalancer`) or domain (`Ingress`) with your browser you will see the Kerberos Factory login page showing up.
 
 ![Once successfully installed Kerberos Factory, it will show you the login page.](../assets/factory-login.gif)
