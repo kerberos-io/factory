@@ -285,36 +285,6 @@ Use one of the preferred OS package managers to install the Helm client:
 
     gofish install helm
 
-### Traefik
-
-[**Traefik**](https://containo.us/traefik/) is a reverse proxy and load balancer which allows you to expose your deployments more easily. Kerberos uses Traefik to expose its APIs more easily.
-
-Add the Helm repository and install traefik.
-
-    kubectl create namespace traefik
-    helm repo add traefik https://helm.traefik.io/traefik
-    helm install traefik traefik/traefik -n traefik
-
-After installation, you should have an IP attached to Traefik service, look for it by executing the `get service` command. You will see the ip address in the `EXTERNAL-IP` attribute.
-
-    kubectl get svc
-
-        NAME                        TYPE           CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-        kubernetes                  ClusterIP      10.0.0.1       <none>          443/TCP                      36h
-    --> traefik                     LoadBalancer   10.0.27.93     40.114.168.96   443:31623/TCP,80:31804/TCP   35h
-        traefik-dashboard           NodePort       10.0.252.6     <none>          80:31146/TCP                 35h
-
-Go to your DNS provider and link the domain you've configured in the first step `traefik.domain.com` to the IP address of thT `EXTERNAL-IP` attribute. When browsing to `traefik.domain.com`, you should see the traefik dashboard showing up.
-
-### Ingress-Nginx (alternative for Traefik)
-
-If you don't like `Traefik` but you prefer `Ingress Nginx`, that works as well.
-
-    helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-    helm repo update
-    kubectl create namespace ingress-nginx
-    helm install ingress-nginx -n ingress-nginx ingress-nginx/ingress-nginx
-
 ### MongoDB
 
 When using Kerberos Factory, it will persist the configurations of your Kerberos Agents in a MongoDB database. As used before, we are using `helm` to install MongoDB in our Kubernetes cluster.
@@ -350,7 +320,19 @@ Create the config map.
 
 ### Deployment
 
-Before installing Kerberos Factory, open the `./kerberos-factory/deployment.yaml` configuration file. At the of the bottom file you will find two endpoints, similar to the Ingres file below. Update the hostname to your own preferred domain, and add these to your DNS server or `/etc/hosts` file (pointing to the same IP as the Traefik/Ingress-nginx EXTERNAL-IP).
+To install the Kerberos Factory web app inside your cluster, simply execute below `kubectl` command. This will create the deployment for us with the necessary configurations, and exposed it on internal IP address, thanks to our `LoadBalancer` MetalLB.
+
+    kubectl apply -f ./kerberos-factory/deployment.yaml -n kerberos-factory
+
+Kerberos Factory will create Kerberos Agents on our behalf, and so create Kubernetes resource deployments. Therefore we'll need to enable some `ClusterRole` and `ClusterRoleBinding`, so we are able to create deployments from Kerberos Factory web app through the Kubernetes Golang SDK.
+
+    kubectl apply -f ./kerberos-factory/clusterrole.yaml -n kerberos-factory
+
+### (Optional) Ingress
+
+By default Kerberos Factory deployment will use and create a `LoadBalancer` through MetalLB. This means that Kerberos Factory will be granted an internal IP from which you can navigate to and consume the Kerberos Factory UI. However if you wish to use the `Ingress` functionality by assigning a readable DNS name, you'll need to modify a few things.
+
+First make sure to install either Traefik or Ingress-nginx, following sections below. Once you have chosen an `Ingress`, open the `./kerberos-factory/ingress.yaml` configuration file. At the of the bottom file you will find an endpoint, similar to the `Ingress` file below. Update the hostname to your own preferred domain, and add these to your DNS server or `/etc/hosts` file (pointing to the same IP as the Traefik/Ingress-nginx EXTERNAL-IP).
 
         spec:
           rules:
@@ -375,13 +357,39 @@ If you are using Ingress Nginx, do not forgot to comment `Traefik` and uncomment
         nginx.ingress.kubernetes.io/ssl-redirect: "true"
         cert-manager.io/cluster-issuer: "letsencrypt-prod"
 
-Once you have corrected the DNS names (or internal /etc/hosts file), install the Kerberos Factory web app inside your cluster.
+Once done, apply the `Ingress` file.
 
-    kubectl apply -f ./kerberos-factory/deployment.yaml -n kerberos-factory
+    kubectl apply -f ./kerberos-factory/ingress.yaml -n kerberos-factory
 
-Kerberos Factory will create Kerberos Agents on our behalf, and so create Kubernetes resource deployments. Therefore we'll need to enable some `ClusterRole` and `ClusterRoleBinding`, so we are able to create deployments from Kerberos Factory web app through the Kubernetes Golang SDK.
+#### Traefik
 
-    kubectl create -f ./kerberos-factory/clusterrole.yaml -n kerberos-factory
+[**Traefik**](https://containo.us/traefik/) is a reverse proxy and load balancer which allows you to expose your deployments more easily. Kerberos uses Traefik to expose its APIs more easily.
+
+Add the Helm repository and install traefik.
+
+    kubectl create namespace traefik
+    helm repo add traefik https://helm.traefik.io/traefik
+    helm install traefik traefik/traefik -n traefik
+
+After installation, you should have an IP attached to Traefik service, look for it by executing the `get service` command. You will see the ip address in the `EXTERNAL-IP` attribute.
+
+    kubectl get svc
+
+        NAME                        TYPE           CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
+        kubernetes                  ClusterIP      10.0.0.1       <none>          443/TCP                      36h
+    --> traefik                     LoadBalancer   10.0.27.93     40.114.168.96   443:31623/TCP,80:31804/TCP   35h
+        traefik-dashboard           NodePort       10.0.252.6     <none>          80:31146/TCP                 35h
+
+Go to your DNS provider and link the domain you've configured in the first step `traefik.domain.com` to the IP address of thT `EXTERNAL-IP` attribute. When browsing to `traefik.domain.com`, you should see the traefik dashboard showing up.
+
+#### Ingress-Nginx (alternative for Traefik)
+
+If you don't like `Traefik` but you prefer `Ingress Nginx`, that works as well.
+
+    helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+    helm repo update
+    kubectl create namespace ingress-nginx
+    helm install ingress-nginx -n ingress-nginx ingress-nginx/ingress-nginx
 
 ### Test out configuration
 
@@ -407,6 +415,6 @@ It should look like this.
 
 ### Access the system
 
-Once everything is configured correctly your cluster and DNS or `/etc/hosts` file, you should be able to access the Kerberos Factory application. By navigating to the domain `factory.domain.com` in your browser you will see the Kerberos Factory login page showing up.
+Once everything is configured correctly, you should be able to access the Kerberos Factory application. By navigating to the internal ip address (`LoadBalancer`) or domain (`Ingress`) with your browser you will see the Kerberos Factory login page showing up.
 
 ![Once successfully installed Kerberos Factory, it will show you the login page.](../assets/factory-login.gif)

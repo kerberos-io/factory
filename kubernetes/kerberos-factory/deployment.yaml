@@ -64,10 +64,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: factory
+  name: factory-lb
   labels:
     app: factory
 spec:
+  type: LoadBalancer
   ports:
   - port: 80
     targetPort: 80
@@ -75,30 +76,3 @@ spec:
     protocol: TCP
   selector:
     app: factory
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: factory
-  annotations:
-    kubernetes.io/ingress.class: traefik
-    #kubernetes.io/ingress.class: nginx
-    #kubernetes.io/tls-acme: "true"
-    #nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    #cert-manager.io/cluster-issuer: "letsencrypt-prod"
-spec:
-  #tls:
-  #- hosts:
-    #- factory.domain.com
-    #secretName: factory-tls
-  rules:
-  - host: factory.domain.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service: 
-            name: factory
-            port: 
-              number: 80
