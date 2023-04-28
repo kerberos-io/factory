@@ -328,6 +328,15 @@ Kerberos Factory will create Kerberos Agents on our behalf, and so create Kubern
 
     kubectl apply -f ./kerberos-factory/clusterrole.yaml -n kerberos-factory
 
+Verify that the Kerberos Factory got assigned an internal IP address.
+
+    kubectl get svc -n kerberos-factor
+
+You should see the service `factory-lb` being created, together with and IP address assigned from MetalLB pool.
+
+        NAME                               TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)        AGE
+    --> factory-lb                         LoadBalancer   10.107.209.226   192.168.1.81   80:30636/TCP   24m
+
 ### (Optional) Ingress
 
 By default Kerberos Factory deployment will use and create a `LoadBalancer` through MetalLB. This means that Kerberos Factory will be granted an internal IP from which you can navigate to and consume the Kerberos Factory UI. However if you wish to use the `Ingress` functionality by assigning a readable DNS name, you'll need to modify a few things.
