@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: factory
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: factory
@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: factory
-        image: "kerberos/factory:1.0.851776620"
+        image: "kerberos/factory:1.0.855664097"
         #imagePullPolicy: Always
         ports:
           - containerPort: 80
