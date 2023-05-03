@@ -350,7 +350,7 @@ First make sure to install either Traefik or Ingress-nginx, following sections b
               paths:
               - path: /
                 backend:
-                  serviceName: kerberos-factory
+                  serviceName: factory
                   servicePort: 80
 
 If you are using Ingress Nginx, do not forgot to comment `Traefik` and uncomment `Ingress Nginx`.
