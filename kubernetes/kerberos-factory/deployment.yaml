@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: factory
-        image: "kerberos/factory:1.0.855664097"
+        image: "kerberos/factory:1.0.870466716"
         #imagePullPolicy: Always
         resources:
           limits:
