@@ -7,4 +7,3 @@ data:
   MONGODB_DATABASE_CREDENTIALS: "admin"
   MONGODB_USERNAME: "root"
   MONGODB_PASSWORD: "yourmongodbpassword"
-  MONGODB_DATABASE_STORAGE: "KerberosFactory"
