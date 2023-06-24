@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: factory
-        image: "kerberos/factory:1.0.870466716"
+        image: "kerberos/factory:1.0.910553312" # or you can use "kerberos/factory:latest"
         #imagePullPolicy: Always
         resources:
           limits:
@@ -45,7 +45,7 @@ spec:
           value: "kerberos"
 
         - name: KERBEROS_AGENT_IMAGE
-          value: "kerberos/agent:9d70778"
+          value: "kerberos/agent:36323b0"
         - name: KERBEROS_AGENT_MEMORY_LIMIT
           value: "256Mi"
 
