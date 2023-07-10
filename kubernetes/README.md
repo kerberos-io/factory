@@ -138,7 +138,7 @@ By default, and in this example, we only have one node our master node. In a pro
 
 Calico is an open source networking and network security solution for containers, virtual machines, and native host-based workloads. (https://www.projectcalico.org/). We will use it as our network layer in our Kubernetes cluster. You could use otthers like Flannel aswell, but we prefer Calico.
 
-    curl https://docs.projectcalico.org/manifests/calico.yaml -O
+    curl https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/calico.yaml -O
     kubectl apply -f calico.yaml
 
 ### Introduction
