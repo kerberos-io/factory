@@ -6,7 +6,7 @@ As described in the `README.md` of this repository. Kerberos Factory runs on kub
 
 Just like `docker`, you bring your Kubernetes cluster where you want `edge` or `cloud`; private or public. Depending where you will host and how (e.g. managed Kubernetes cluster vs self-hosted) you'll have less/more responsibilities and/or control. Where and how is totally up to you, and your company preferences.
 
-This installation guide will slighy modify depending on if you are self-hosting or leveraging a managed Kubernetes service by a cloud provider. Within a self-hosted installation you'll be required to install specific Kubernetes resources yourself, such as persistent volumes, storage and a load balancer.
+This installation guide will slighy modify depending on if you are self-hosting or leveraging a managed Kubernetes service by a cloud provider. Within a self-hosted installation you'll be required to install specific Kubernetes resources yourself, such as persistent volumes, storage and a load baluancer.
 
 ![Kerberos Factory deployments](assets/kerberosfactory-deployments.svg)
 
@@ -164,7 +164,7 @@ We'll start by cloning the configurations from our [Github repo](https://github.
 
 Make sure to change directory to the `kubernetes` folder.
 
-    cd kubernetes
+    cd factory/kubernetes
 
 ### MetalLB
 
