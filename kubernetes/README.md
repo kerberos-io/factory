@@ -4,7 +4,8 @@ As described in the `README.md` of this repository. Kerberos Factory runs on kub
 
 ## Managed Kubernetes vs Self-hosted Kubernetes
 
-Just like `docker`, you bring your Kubernetes cluster where you want `edge` or `cloud`; private or public. Depending where you will host and how (e.g. managed Kubernetes cluster vs self-hosted) you'll have less/more responsibilities and/or control. Where and how is totally up to you, and your company preferences.
+Just like `
+`, you bring your Kubernetes cluster where you want `edge` or `cloud`; private or public. Depending where you will host and how (e.g. managed Kubernetes cluster vs self-hosted) you'll have less/more responsibilities and/or control. Where and how is totally up to you, and your company preferences.
 
 This installation guide will slighy modify depending on if you are self-hosting or leveraging a managed Kubernetes service by a cloud provider. Within a self-hosted installation you'll be required to install specific Kubernetes resources yourself, such as persistent volumes, storage and a load baluancer.
 
@@ -76,7 +77,7 @@ Enable and start crio:
 
 ### Kubernetes
 
-After Docker being installed go ahead and install the different Kubernetes servicess and tools.
+After Container Engine being installed go ahead and install the different Kubernetes servicess and tools.
 
     apt update -y
     apt-gt install -y apt-transport-https ca-certificates curl
