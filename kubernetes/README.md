@@ -13,7 +13,7 @@ This installation guide will slighy modify depending on if you are self-hosting 
 ### A. Self-hosted Kubernetes
 
 1. [Prerequisites](#prerequisites-1)
-2. [Docker](#docker)
+2. [Container Engine](#container-engine)
 3. [Kubernetes](#kubernetes)
 4. [Untaint all nodes](#untaint-all-nodes)
 5. [Calico](#calico)
@@ -48,43 +48,47 @@ The good things is that installation of a self-hosted Kubernetes cluster, contai
 
 ### Prerequisites
 
-We'll assume you have a blank Ubuntu 20.04 LTS machine (or multiple machines/nodes) at your posession. We'll start with updating the Ubuntu operating system.
+We'll assume you have a blank Ubuntu 20.04 / 22.04 LTS machine (or multiple machines/nodes) at your posession. We'll start with updating the Ubuntu operating system.
 
     apt-get update -y && apt-get upgrade -y
 
-### Docker
+### Container Engine
 
-Let's install our container runtime `docker` so we can run our containers.
+    export OS_VERSION_ID=xUbuntu_$(cat /etc/os-release | grep VERSION_ID | awk -F"=" '{print $2}' | tr -d '"')
+    export CRIO_VERSION=1.25
 
-    apt install docker.io -y
+Add repositories
 
-Once installed modify the `cgroup driver`, so kubernetes will be using it correctly. By default Kubernetes cgroup driver was set to systems but docker was set to systemd.
+    echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/$OS_VERSION_ID/ /"|sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list
+    echo "deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable:/cri-o:/$CRIO_VERSION/$OS_VERSION_ID/ /"|sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable:cri-o:$CRIO_VERSION.list
+    curl -L https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable:cri-o:$CRIO_VERSION/$OS_VERSION_ID/Release.key | sudo apt-key --keyring /etc/apt/trusted.gpg.d/libcontainers.gpg add -
+    curl -L https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/$OS_VERSION_ID/Release.key | sudo apt-key --keyring /etc/apt/trusted.gpg.d/libcontainers.gpg add -
 
-    sudo mkdir /etc/docker
-    cat <<EOF | sudo tee /etc/docker/daemon.json
-    {
-      "exec-opts": ["native.cgroupdriver=systemd"],
-      "log-driver": "json-file",
-      "log-opts": {
-        "max-size": "100m"
-      },
-      "storage-driver": "overlay2"
-    }
-    EOF
+Update package index and install crio:
 
-    sudo systemctl enable docker
-    sudo systemctl daemon-reload
-    sudo systemctl restart docker
+    apt-get update
+    apt-get install cri-o cri-o-runc cri-tools -y
+
+Enable and start crio:
+
+    systemctl daemon-reload
+    systemctl enable crio --now
 
 ### Kubernetes
 
 After Docker being installed go ahead and install the different Kubernetes servicess and tools.
 
     apt update -y
-    apt install apt-transport-https curl -y
-    curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add
-    apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
-    apt install kubelet=1.25.0-00 kubeadm=1.25.0-00 kubectl=1.25.0-00 -y
+    apt-gt install -y apt-transport-https ca-certificates curl
+    curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+
+    apt-get update
+    apt-get install -y kubelet kubeadm kubectl
+
+Hold these packages to prevent unintentional updates:
+
+    apt-mark hold kubelet kubeadm kubectl
 
 Make sure you disable swap, this is required by Kubernetes.
 
