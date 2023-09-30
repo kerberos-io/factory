@@ -45,7 +45,7 @@ spec:
           value: "kerberos"
 
         - name: KERBEROS_AGENT_IMAGE
-          value: "kerberos/agent:384448d"
+          value: "kerberos/agent:24136f8"
         - name: KERBEROS_AGENT_MEMORY_LIMIT
           value: "256Mi"
 
