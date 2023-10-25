@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: factory
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: factory
@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: factory
-        image: "kerberos/factory:1.0.910553312" # or you can use "kerberos/factory:latest"
+        image: "kerberos/factory:1.0.1049084302" # or you can use "kerberos/factory:latest"
         #imagePullPolicy: Always
         resources:
           limits:
@@ -31,11 +31,15 @@ spec:
         envFrom:
           - configMapRef:
               name: mongodb
+
         # Injecting the ca-certificates inside the container.
         #volumeMounts:
         #- name: rootcerts
         #  mountPath: /etc/ssl/certs/ca-certificates.crt
         #  subPath: ca-certificates.crt
+        #- name: custom-layout
+        #  mountPath: /home/factory/www/assets/custom
+
         env:
         - name: GIN_MODE
           value: release
@@ -62,10 +66,14 @@ spec:
         # the Kerberos Agent in following directory: /etc/ssl/certs/
         #- name: CERTIFICATES_CONFIGMAP
         #  value: "rootcerts" 
+
       #volumes:
       #- name: rootcerts
       #  configMap:
       #    name: rootcerts
+      #- name: custom-layout
+      #  persistentVolumeClaim:
+      #    claimName: custom-layout-claim
 ---
 apiVersion: v1
 kind: Service
