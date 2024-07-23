@@ -49,6 +49,7 @@ The good things is that installation of a self-hosted Kubernetes cluster, contai
 ### Prerequisites
 
 We'll assume you have a blank Ubuntu 20.04 / 22.04 LTS machine (or multiple machines/nodes) at your posession. We'll start with updating the Ubuntu operating system.
+Please note that if you encounter the error `Interactive authentication required.`, simply add `sudo` to the beginning of every command to give them sufficient privilleges or run your Ubuntu as administrator.
 
     apt-get update -y && apt-get upgrade -y
 
@@ -79,8 +80,8 @@ Enable and start crio:
 After Container Engine being installed go ahead and install the different Kubernetes servicess and tools.
 
     apt update -y
-    apt-gt install -y apt-transport-https ca-certificates curl
-    curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+    apt-get install -y apt-transport-https ca-certificates curl
+    curl sudo -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
     apt-get update
