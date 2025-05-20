@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: factory
-        image: "uugai/factory:v1.0.4" # or you can use "uugai/factory:latest"
+        image: "uugai/factory:v1.0.8" # or you can use "uugai/factory:latest"
         #imagePullPolicy: Always
         resources:
           requests:
