@@ -4,7 +4,7 @@ metadata:
   name: mongodb
 data:
   # This is the mongodb database where configurations will be stored, you might use a different name if you want.
-  MONGODB_DATABASE_Factory: "KerberosFactory"
+  MONGODB_DATABASE_FACTORY: "KerberosFactory"
 
   # MongoDB URI (for example for a SaaS service like MongoDB Atlas)
   # If uri is set, the below properties are not used (host, adminDatabase, username, password)
