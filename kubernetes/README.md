@@ -79,9 +79,9 @@ Enable and start crio:
 After Container Engine being installed go ahead and install the different Kubernetes servicess and tools.
 
     apt update -y
-    apt-gt install -y apt-transport-https ca-certificates curl
+    apt-get install -y apt-transport-https ca-certificates curl
     curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+    echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
     apt-get update
     apt-get install -y kubelet kubeadm kubectl
