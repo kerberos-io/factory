@@ -1,7 +1,7 @@
 # Factory
 
 > [!IMPORTANT]
-> **Kerberos Factory has moved — this repository is no longer the source of truth.**
+> **Factory has moved — this repository is no longer the source of truth.**
 >
 > The project is alive and actively maintained, just in new homes. Its documentation, deployment manifests and container images now live in the locations listed below. This repository is kept for historical reference only.
 
